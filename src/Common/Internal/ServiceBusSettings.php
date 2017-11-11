@@ -212,12 +212,12 @@ class ServiceBusSettings extends ServiceSettings {
             Resources::SHARED_SECRET_VALUE_NAME,
             $tokenizedSettings
         );
-
+    
         return new self($endpoint, new WrapFilter(
             $wrapEndpointUri,
             $issuerName,
             $issuerValue,
-            $this->createWrapService($wrapEndpointUri)
+            self::createWrapService($wrapEndpointUri)
         ));
     }
     /**
@@ -257,7 +257,7 @@ class ServiceBusSettings extends ServiceSettings {
      * @param $wrapEndpointUri
      * @return mixed
      */
-    protected function createWrapService($wrapEndpointUri) {
+    public static function createWrapService($wrapEndpointUri) {
         $httpClient = new HttpClient();
         $wrapWrapper = new WrapRestProxy($httpClient, $wrapEndpointUri);
 
